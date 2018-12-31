@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run patw0929/udemy-docker-deploy-practice npm test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "udemy-docker-deploy-practice"
+  env: "UdemyDockerDeployPractice-env"
+  bucket_name: "elasticbeanstalk-us-west-2-096277782033"
+  bucket_path: "udemy-docker-deploy-practice"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
